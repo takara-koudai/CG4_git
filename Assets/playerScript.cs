@@ -8,29 +8,19 @@ public class playerScript : MonoBehaviour
 
     public Rigidbody rb;
 
+    float movespeedJamp = 8f;
     float movespeed = 4f;
 
     private bool isJamp;
 
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    isJamp = true;
-    //}
-
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    isJamp = false;
-    //}
+    private void OnCollisionStay(Collision collision)
+    {
+        isJamp = true;
+    }
 
     private void OnCollisionExit(Collision collision)
     {
         isJamp = false;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -51,24 +41,18 @@ public class playerScript : MonoBehaviour
             v.x = 0;
         }
 
-        //ジャンプ
-        if(Input.GetKey(KeyCode.Space))
+        //ジャンプ(一回だけしか飛ばない)
+        if(isJamp && Input.GetKey(KeyCode.Space))
         {
-            v.y = movespeed;
+            v.y = movespeedJamp;
         }
 
-        /*if(isJamp && Input.GetKey(KeyCode.Space))
-        {
-            float dist = v.y - movespeed;
-            if(dist < movespeed)
-            {
-                return;
-            }
-            rb.velocity = v;
-        }*/
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+        //    v.y = movespeedJamp;
+        //}
 
         rb.velocity = v;
-
 
     }
 }
