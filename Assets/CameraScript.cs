@@ -16,7 +16,7 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //スクロールとプレイヤー追跡カメラ
         var playerPosition = player.transform.position;
         var position = transform.position;
         position.x = playerPosition.x;

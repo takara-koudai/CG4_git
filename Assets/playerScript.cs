@@ -26,33 +26,35 @@ public class playerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //左右に動く
-        Vector3 v = rb.velocity;
-        if (Input.GetKey(KeyCode.RightArrow))
+        if(GoalScript.isGameClear == false)
         {
-            v.x = movespeed;
-        } 
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            v.x = -movespeed;
+            //左右に動く
+            Vector3 v = rb.velocity;
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                v.x = movespeed;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                v.x = -movespeed;
+            }
+            else
+            {
+                v.x = 0;
+            }
+
+            //ジャンプ(一回だけしか飛ばない)
+            //if(isJamp && Input.GetKey(KeyCode.Space))
+            //{
+            //    v.y = movespeedJamp;
+            //}
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                v.y = movespeedJamp;
+            }
+
+            rb.velocity = v;
         }
-        else
-        {
-            v.x = 0;
-        }
-
-        //ジャンプ(一回だけしか飛ばない)
-        if(isJamp && Input.GetKey(KeyCode.Space))
-        {
-            v.y = movespeedJamp;
-        }
-
-        //if (Input.GetKey(KeyCode.Space))
-        //{
-        //    v.y = movespeedJamp;
-        //}
-
-        rb.velocity = v;
-
     }
 }
