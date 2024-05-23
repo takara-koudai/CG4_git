@@ -23,6 +23,20 @@ public class playerScript : MonoBehaviour
         isJamp = false;
     }
 
+    //コインとの衝突フラグ
+    private void OnTriggerEnter(Collider other)
+    {
+        other.gameObject.SetActive(false);
+
+        if(other.gameObject.tag == "Coin")
+        {
+            other.gameObject.SetActive(false);
+            //ここにコインを取った時の音を入れる
+
+            GameManagerScript.score += 1;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -44,15 +58,15 @@ public class playerScript : MonoBehaviour
             }
 
             //ジャンプ(一回だけしか飛ばない)
-            //if(isJamp && Input.GetKey(KeyCode.Space))
-            //{
-            //    v.y = movespeedJamp;
-            //}
-
-            if (Input.GetKey(KeyCode.Space))
+            if(isJamp && Input.GetKey(KeyCode.Space))
             {
                 v.y = movespeedJamp;
             }
+
+            //if (Input.GetKey(KeyCode.Space))
+            //{
+            //    v.y = movespeedJamp;
+            //}
 
             rb.velocity = v;
         }
