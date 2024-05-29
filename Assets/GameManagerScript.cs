@@ -17,6 +17,8 @@ public class GameManagerScript : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
 
+    public GameObject GoalParticle;
+
     public static int score = 0;
 
     //マップ(ステージ)
@@ -30,8 +32,8 @@ public class GameManagerScript : MonoBehaviour
         {1,0,0,0,0,0,1,1,0,0, 2,0,0,0,0,0,2,0,0,0, 0,0,0,2,2,0,0,0,0,0, 1,1,0,0,0,0,0,0,0,1},
         {1,0,0,0,0,0,0,0,0,0, 1,0,0,0,0,1,1,0,0,0, 0,0,0,1,1,0,0,0,0,0, 0,0,0,0,2,1,1,0,0,1},
         {1,0,0,0,2,0,0,0,0,0, 0,0,2,0,0,0,0,0,0,0, 0,0,0,0,0,0,1,1,0,0, 0,0,0,0,1,0,0,0,0,1},
-        {1,0,0,0,1,0,0,2,0,0, 0,0,1,0,0,2,0,0,0,0, 0,1,0,2,0,0,0,0,0,2, 0,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,0,0,1,1,1, 1,1,1,1,1,1,1,1,1,1, 0,0,1,1,0,0,1,1,0,1, 0,0,1,0,0,1,1,1,1,1},
+        {1,0,0,0,0,0,0,2,0,0, 0,0,1,0,0,2,0,0,0,0, 0,1,0,2,0,0,0,0,0,2, 0,0,0,0,0,0,0,0,0,1},
+        {1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1,1, 0,0,1,1,0,0,1,1,0,1, 0,0,1,0,0,1,1,1,1,1},
     };
 
     // Start is called before the first frame update
@@ -62,6 +64,8 @@ public class GameManagerScript : MonoBehaviour
                 if (map[y,x] == 3)
                 {
                     goal.transform.position = position;
+
+                    GoalParticle.transform.position = position;
                 }
             }
         }

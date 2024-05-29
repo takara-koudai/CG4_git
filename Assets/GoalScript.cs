@@ -9,6 +9,10 @@ public class GoalScript : MonoBehaviour
 
     public static bool isGameClear = false;
 
+    //private ParticleSystem particle;
+
+    
+
     private void OnTriggerEnter(Collider other)
     {
         gameClearText.SetActive(true);

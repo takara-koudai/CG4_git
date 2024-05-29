@@ -7,6 +7,9 @@ public class playerScript : MonoBehaviour
 {
 
     public Rigidbody rb;
+    private AudioSource audioSource;
+
+    public GameObject bombParticle;
 
     float movespeedJamp = 8f;
     float movespeed = 4f;
@@ -23,20 +26,33 @@ public class playerScript : MonoBehaviour
         isJamp = false;
     }
 
+    
+    void Start()
+    {
+        //音を鳴らす
+        audioSource = gameObject.GetComponent<AudioSource>();
+    }
+
     //コインとの衝突フラグ
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.SetActive(false);
+        //other.gameObject.SetActive(false);
 
         if(other.gameObject.tag == "Coin")
         {
+            //スコアを増やす
             other.gameObject.SetActive(false);
-            //ここにコインを取った時の音を入れる
-
             GameManagerScript.score += 1;
+
+            //ここにコインを取った時の音を入れる
+            audioSource.Play();
+
+            //爆発パーティクル発生
+            Instantiate(bombParticle, transform.position, Quaternion.identity);
         }
     }
 
+   
     // Update is called once per frame
     void Update()
     {
