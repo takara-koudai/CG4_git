@@ -8,6 +8,7 @@ public class GameManagerScript : MonoBehaviour
 {
 
     public GameObject block;
+    public GameObject block2;
 
     public GameObject goal;
 
@@ -40,6 +41,9 @@ public class GameManagerScript : MonoBehaviour
     void Start()
     {
 
+        int lenY = map.GetLength(0);
+        int lenX = map.GetLength(1);
+
         Vector3 position = Vector3.zero;
 
         //ÉuÉçÉbÉNï`âÊ
@@ -70,9 +74,17 @@ public class GameManagerScript : MonoBehaviour
             }
         }
 
-        int lenY = map.GetLength(0);
-        int lenX = map.GetLength(1);
-
+        //îwåi
+        for(int y = 0;y < lenY;y++)
+        {
+            for(int x = 0;x < 1280;x++)
+            {
+                position.x = x;
+                position.y = -y + 5;
+                position.z = 3;
+                Instantiate(block2, position, Quaternion.identity);
+            }
+        }
     }
 
     // Update is called once per frame

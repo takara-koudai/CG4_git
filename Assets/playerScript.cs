@@ -9,16 +9,21 @@ public class playerScript : MonoBehaviour
     public Rigidbody rb;
     private AudioSource audioSource;
 
+    public Animator animator;
+
     public GameObject bombParticle;
 
     float movespeedJamp = 8f;
     float movespeed = 4f;
 
     private bool isJamp;
+    //private bool isBlock;
 
     private void OnCollisionStay(Collision collision)
     {
         isJamp = true;
+
+        animator.SetBool("jump", false);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -31,6 +36,8 @@ public class playerScript : MonoBehaviour
     {
         //音を鳴らす
         audioSource = gameObject.GetComponent<AudioSource>();
+
+        transform.rotation = Quaternion.Euler(0, 90, 0);
     }
 
     //コインとの衝突フラグ
@@ -58,31 +65,64 @@ public class playerScript : MonoBehaviour
     {
         if(GoalScript.isGameClear == false)
         {
+            
+
             //左右に動く
             Vector3 v = rb.velocity;
-            if (Input.GetKey(KeyCode.RightArrow))
+            float stick = Input.GetAxis("Horizontal");
+
+            if (Input.GetKey(KeyCode.RightArrow) || stick > 0)
             {
                 v.x = movespeed;
+                transform.rotation = Quaternion.Euler(0, 90, 0);
+
+                animator.SetBool("walk", true);
             }
-            else if (Input.GetKey(KeyCode.LeftArrow))
+            else if (Input.GetKey(KeyCode.LeftArrow) || stick < 0)
             {
                 v.x = -movespeed;
+                transform.rotation = Quaternion.Euler(0, -90, 0);
+
+                animator.SetBool("walk", true);
             }
             else
             {
                 v.x = 0;
+
+                animator.SetBool("walk", false);
             }
 
+            
             //ジャンプ(一回だけしか飛ばない)
             if(isJamp && Input.GetKey(KeyCode.Space))
             {
+
+                if(isJamp)
+                {
+                    animator.SetBool("jump", true);
+                }
+                else
+                {
+                    animator.SetBool("jump", false);
+                }
+
                 v.y = movespeedJamp;
             }
 
-            //if (Input.GetKey(KeyCode.Space))
-            //{
-            //    v.y = movespeedJamp;
-            //}
+            //PADでのジャンプ
+            if(isJamp && Input.GetButton("Jump"))
+            {
+                if (isJamp)
+                {
+                    animator.SetBool("jump", true);
+                }
+                else
+                {
+                    animator.SetBool("jump", false);
+                }
+
+                v.y = movespeedJamp;
+            }
 
             rb.velocity = v;
         }
