@@ -11,8 +11,6 @@ public class GoalScript : MonoBehaviour
 
     //private ParticleSystem particle;
 
-    
-
     private void OnTriggerEnter(Collider other)
     {
         gameClearText.SetActive(true);

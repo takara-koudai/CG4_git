@@ -17,7 +17,6 @@ public class playerScript : MonoBehaviour
     float movespeed = 4f;
 
     private bool isJamp;
-    //private bool isBlock;
 
     private void OnCollisionStay(Collision collision)
     {
@@ -30,7 +29,6 @@ public class playerScript : MonoBehaviour
     {
         isJamp = false;
     }
-
     
     void Start()
     {
@@ -65,7 +63,6 @@ public class playerScript : MonoBehaviour
     {
         if(GoalScript.isGameClear == false)
         {
-            
 
             //ç∂âEÇ…ìÆÇ≠
             Vector3 v = rb.velocity;
